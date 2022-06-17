@@ -20,6 +20,10 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 import re
+import pandas as pd
+df = pd.read_csv("c:\\users\\elvis\\Desktop\\PyCode\\mails.csv")
+# js = df.to_json(orient = 'records',  force_ascii=False)
+data = df.to_string()
 app = Flask(__name__)
 
 # 必須放上自己的Channel Access Token
@@ -46,7 +50,7 @@ def callback():
         abort(400)
 
     return 'OK'
-
+# '拆解步驟詳細介紹安裝並使用Anaconda、Python、Spyder、VScode…'
 #訊息傳遞區塊
 ##### 基本上程式編輯都在這個function #####
 @handler.add(MessageEvent, message=TextMessage)
@@ -64,7 +68,7 @@ def handle_message(event):
                         actions=[
                             MessageAction(
                                 label='教學內容',
-                                text='拆解步驟詳細介紹安裝並使用Anaconda、Python、Spyder、VScode…'
+                                text=data
                             ),
                             URIAction(
                                 label='馬上查看',
