@@ -23,11 +23,11 @@ import re
 app = Flask(__name__)
 
 # 必須放上自己的Channel Access Token
-line_bot_api = LineBotApi('7BzW5LqyzXzq+Vp9mP3EWjHGTgmto7ogCBc1QftEcMGkwauHpQ5crcBQbER/BbzeLa4BdmIsd4a/jeqEkxU/K4dTSprIDTMzadRo8JOIa+jdoyeWFxpZRlifWR4SsKhEyCx2JLRGdHHTSULjBFPN8gdB04t89/1O/w1cDnyilFU=')  #你自己的token
+line_bot_api = LineBotApi('7BzW5LqyzXzq+Vp9mP3EWjHGTgmto7ogCBc1QftEcMGkwauHpQ5crcBQbER/BbzeLa4BdmIsd4a/jeqEkxU/K4dTSprIDTMzadRo8JOIa+jdoyeWFxpZRlifWR4SsKhEyCx2JLRGdHHTSULjBFPN8gdB04t89/1O/w1cDnyilFU=')
 # 必須放上自己的Channel Secret
-handler = WebhookHandler('e07acd6e4cf0a0c84272962d4aa9ce0f')  #你自己的secret
-# 主動推播push_message(請填入您的ID)
-line_bot_api.push_message('U9903430172b3160867439bbc74135845', TextSendMessage(text='你可以開始了'))  #你自己的ID
+handler = WebhookHandler('e07acd6e4cf0a0c84272962d4aa9ce0f')
+
+line_bot_api.push_message('U9903430172b3160867439bbc74135845', TextSendMessage(text='你可以開始了'))
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
@@ -51,9 +51,14 @@ def callback():
 ##### 基本上程式編輯都在這個function #####
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = event.message.text
+    message = text=event.message.text
     if re.match('告訴我秘密',message):
-        line_bot_api.reply_message(event.reply_token,TextSendMessage('才不告訴你哩！'))
+        # 貼圖查詢：https://developers.line.biz/en/docs/messaging-api/sticker-list/#specify-sticker-in-message-object
+        sticker_message = StickerSendMessage(
+            package_id='1',
+            sticker_id='1'
+        )
+        line_bot_api.reply_message(event.reply_token, sticker_message)
     else:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
 #主程式
