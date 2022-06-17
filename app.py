@@ -24,7 +24,7 @@ import re
 # df = pd.read_csv("c:\\users\\elvis\\Desktop\\PyCode\\mails.csv")
 # js = df.to_json(orient = 'records',  force_ascii=False)
 # data = df.to_string()
-data = 'Elvis is the king'
+data = 'Lucifer is evil'
 app = Flask(__name__)
 
 # 必須放上自己的Channel Access Token
@@ -69,7 +69,7 @@ def handle_message(event):
                         actions=[
                             MessageAction(
                                 label='教學內容',
-                                text='Elvis is the king'
+                                text=data
                             ),
                             URIAction(
                                 label='馬上查看',
