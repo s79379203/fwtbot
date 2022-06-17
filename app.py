@@ -23,7 +23,8 @@ import re
 import pandas as pd
 df = pd.read_csv("c:\\users\\elvis\\Desktop\\PyCode\\mails.csv")
 # js = df.to_json(orient = 'records',  force_ascii=False)
-data = df.to_string()
+# data = df.to_string()
+data = 'Elvis is the king'
 app = Flask(__name__)
 
 # 必須放上自己的Channel Access Token
