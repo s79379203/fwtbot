@@ -69,7 +69,7 @@ def handle_message(event):
                         actions=[
                             MessageAction(
                                 label='教學內容',
-                                text=data
+                                text='Elvis is the king'
                             ),
                             URIAction(
                                 label='馬上查看',
