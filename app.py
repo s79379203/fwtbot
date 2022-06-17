@@ -21,7 +21,7 @@ from linebot.exceptions import (
 from linebot.models import *
 import re
 # import pandas as pd
-# df = pd.read_csv("c:\\users\\elvis\\Desktop\\PyCode\\mails.csv")
+df = pd.read_csv("c:\\users\\elvis\\Desktop\\PyCode\\mails.csv")
 # js = df.to_json(orient = 'records',  force_ascii=False)
 # data = df.to_string()
 data = 'Lucifer is evil'
@@ -32,7 +32,7 @@ line_bot_api = LineBotApi('7BzW5LqyzXzq+Vp9mP3EWjHGTgmto7ogCBc1QftEcMGkwauHpQ5cr
 # 必須放上自己的Channel Secret
 handler = WebhookHandler('e07acd6e4cf0a0c84272962d4aa9ce0f')
 
-line_bot_api.push_message('U9903430172b3160867439bbc74135845', TextSendMessage(text='你可以開始了'))
+line_bot_api.push_message('U9903430172b3160867439bbc74135845', TextSendMessage(text='Hello Lucifer'))
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
