@@ -21,10 +21,10 @@ from linebot.exceptions import (
 from linebot.models import *
 import re
 # import pandas as pd
-df = pd.read_csv("c:\\users\\elvis\\Desktop\\PyCode\\mails.csv")
+# df = pd.read_csv("c:\\users\\elvis\\Desktop\\PyCode\\mails.csv")
 # js = df.to_json(orient = 'records',  force_ascii=False)
 # data = df.to_string()
-data = 'Lucifer is evil'
+data = 'total input is ' + str(10) +'USD'
 app = Flask(__name__)
 
 # 必須放上自己的Channel Access Token
