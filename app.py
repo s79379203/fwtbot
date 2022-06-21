@@ -61,7 +61,7 @@ def handle_message(event):
         carousel_template  = CarouselTemplate(
                 columns=[
                     CarouselColumn(
-                        thumbnail_image_url='https://i.imgur.com/OWciycm.jpg',
+                        thumbnail_image_url='https://i.imgur.com/xZmu9jp.jpg',
                         title='FWT績效',
                         text='接單狀況',
                         actions=[
@@ -77,12 +77,12 @@ def handle_message(event):
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='https://i.imgur.com/W7nI6fg.jpg',
+                        thumbnail_image_url='https://i.imgur.com/Lr88MTG.png',
                         title='FWT績效',
-                        text='待開發',
+                        text='OutPut',
                         actions=[
                             MessageAction(
-                                label='未開發',
+                                label='出貨金額',
                                 text=data
                             ),
                             URIAction(
