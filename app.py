@@ -7,7 +7,7 @@ Created on Wed Jun  2 21:16:35 2021
 
 Line Bot聊天機器人
 第四章 選單功能
-多樣版組合按鈕CarouselTemplate
+大圖按鈕ImageCarouselTemplate
 """
 #載入LineBot所需要的套件
 from flask import Flask, request, abort
@@ -20,19 +20,14 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 import re
-# import pandas as pd
-# df = pd.read_csv("c:\\users\\elvis\\Desktop\\PyCode\\mails.csv")
-# js = df.to_json(orient = 'records',  force_ascii=False)
-# data = df.to_string()
-# data = 'total input is ' + str(10) +'USD'
 app = Flask(__name__)
 
 # 必須放上自己的Channel Access Token
-line_bot_api = LineBotApi('7BzW5LqyzXzq+Vp9mP3EWjHGTgmto7ogCBc1QftEcMGkwauHpQ5crcBQbER/BbzeLa4BdmIsd4a/jeqEkxU/K4dTSprIDTMzadRo8JOIa+jdoyeWFxpZRlifWR4SsKhEyCx2JLRGdHHTSULjBFPN8gdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi('你自己的token')
 # 必須放上自己的Channel Secret
-handler = WebhookHandler('e07acd6e4cf0a0c84272962d4aa9ce0f')
-# 主動推播提示資訊: push message
-line_bot_api.push_message('U9903430172b3160867439bbc74135845', TextSendMessage(text='歡迎使用FWT小幫手. 請輸入小寫fwt開始!'))
+handler = WebhookHandler('你自己的secret')
+
+line_bot_api.push_message('你自己的ID', TextSendMessage(text='你可以開始了'))
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
@@ -51,95 +46,41 @@ def callback():
         abort(400)
 
     return 'OK'
-# '拆解步驟詳細介紹安裝並使用Anaconda、Python、Spyder、VScode…'
+
 #訊息傳遞區塊
 ##### 基本上程式編輯都在這個function #####
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = text=event.message.text
-    if re.match('fwt',message):
-        carousel_template  = CarouselTemplate(
+    if re.match('告訴我秘密',message):
+        image_carousel_template_message = TemplateSendMessage(
+            alt_text='免費教學影片',
+            template=ImageCarouselTemplate(
                 columns=[
-                    CarouselColumn(
-                        thumbnail_image_url='https://i.imgur.com/wpM584d.jpg',
-                        title='FWT績效',
-                        text='接單狀況',
-                        actions=[
-                            PostbackAction(
-                                label='接單金額',
-                                data=data,
-                                text='Sales接單明細'
-                            ),
-                            URIAction(
-                                label='公司官網',
-                                uri='http://www.forward-tech.com.tw/'
-                            )
-                        ]
+                    ImageCarouselColumn(
+                        image_url='https://i.imgur.com/wpM584d.jpg',
+                        action=PostbackAction(
+                            label='Python基礎教學影片',
+                            display_text='萬丈高樓平地起',
+                            data='action=努力不一定會成功，但不努力會很輕鬆'
+                        )
                     ),
-                    CarouselColumn(
-                        thumbnail_image_url='https://i.imgur.com/W7nI6fg.jpg',
-                        title='FWT績效',
-                        text='待開發',
-                        actions=[
-                            MessageAction(
-                                label='未開發',
-                                text=data
-                            ),
-                            URIAction(
-                                label='馬上查看',
-                                uri='http://www.forward-tech.com.tw/'
-                            )
-                        ]
-                    ),
-                    CarouselColumn(
-                        thumbnail_image_url='https://i.imgur.com/l7rzfIK.jpg',
-                        title='FWT績效',
-                        text='待開發2',
-                        actions=[
-                            MessageAction(
-                                label='未開發2',
-                                text=data
-                            ),
-                            URIAction(
-                                label='馬上查看',
-                                uri='http://www.forward-tech.com.tw/'
-                            )
-                        ]
+                    ImageCarouselColumn(
+                        image_url='https://i.imgur.com/W7nI6fg.jpg',
+                        action=PostbackAction(
+                            label='LineBot聊天機器人',
+                            display_text='台灣最廣泛使用的通訊軟體',
+                            data='action=興趣不能當飯吃，但總比吃飯當興趣好'
+                        )
                     )
                 ]
             )
-
-        # line_bot_api.reply_message(event.reply_token, carousel_template_message)
-        template_message = TemplateSendMessage(
-        alt_text = 'Carousel alt text', template = carousel_template)
-
-        line_bot_api.reply_message(event.reply_token, template_message)
+        )
+        line_bot_api.reply_message(event.reply_token, image_carousel_template_message)
     else:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
 #主程式
-
-import sqlite3
-
-import os.path
-
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-db_path = os.path.join(BASE_DIR, "CustOrders.db")
-
-try:
-    con = sqlite3.connect(db_path)
-    cursor = con.cursor()
-    cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-    print(cursor.fetchall()[2])
-    data = '2022年' + '\n'
-    for item in cursor.execute("SELECT * FROM OrdersBySales;"):
-        data += item[0]+'˙累積接單:'+str(item[1])+'萬'+' 月平均接單:'+str(item[2])+'萬' +'\n'
-        print(data)
-    con.close()
-except sqlite3.Error as e:
-
-    print(f"Error {e.args[0]}")
-
+import os
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
