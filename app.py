@@ -137,7 +137,7 @@ try:
     totalamt = 0
     avgamt = 0
     for item in cursor.execute("SELECT * FROM OrdersBySales;"):
-        data += item[0]+'˙累積接單:'+str(item[1])+'萬 \n'+' 月平均:'+str(item[2])+'萬 ' +'\n'
+        data += item[0]+'˙累積接單:'+str(item[1])+'萬 \n'+'月平均:'+str(item[2])+'萬 ' +'\n'
         print(data)
         totalamt += item[1]
         avgamt += item[2]
@@ -147,11 +147,11 @@ try:
     totalamt2 = 0
     avgamt2 = 0
     for item in cursor.execute("SELECT * FROM outputbysales"):
-        data2 += item[0] + '˙出貨金額:' + str(item[1]) + '萬 \n' + ' 月平均:' + str(item[2]) + '萬 \n' + '毛利率:'+str(item[5])+'\n'
+        data2 += item[0] + '˙出貨金額:' + str(item[1]) + '萬 \n' + '月平均:' + str(item[2]) + '萬 \n' + '毛利率:'+str(item[5])+'\n'
         print(data2)
         totalamt2 += item[1]
         avgamt2 += item[2]
-    data2 += '總金額:' + str(totalamt) + '萬 \n' + '月平均:' + str(round(avgamt, ndigits=1)) + '萬 '
+    data2 += '總金額:' + str(totalamt2) + '萬 \n' + '月平均:' + str(round(avgamt2, ndigits=1)) + '萬 '
     con.close()
 except sqlite3.Error as e:
 
