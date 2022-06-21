@@ -61,12 +61,12 @@ def handle_message(event):
         carousel_template  = CarouselTemplate(
                 columns=[
                     CarouselColumn(
-                        thumbnail_image_url='https://i.imgur.com/wpM584d.jpg',
+                        thumbnail_image_url='https://i.imgur.com/OWciycm.jpg',
                         title='FWT績效',
                         text='接單狀況',
                         actions=[
                             PostbackAction(
-                                label='接單明細',
+                                label='業務接單金額',
                                 display_text=data,
                                 data='action=接單明細'
                             ),
@@ -132,9 +132,15 @@ try:
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
     print(cursor.fetchall()[2])
     data = '2022年' + '\n'
+    totalamt = 0
+    avgamt = 0
     for item in cursor.execute("SELECT * FROM OrdersBySales;"):
         data += item[0]+'˙累積接單:'+str(item[1])+'萬'+' 月平均接單:'+str(item[2])+'萬' +'\n'
         print(data)
+        totalamt += item[1]
+        avgamt += item[2]
+    data += '總金額:'+str(totalamt)+'萬 '+'月平均:'+str(avgamt)+'萬 '
+    print(data)
     con.close()
 except sqlite3.Error as e:
 
