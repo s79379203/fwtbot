@@ -139,7 +139,7 @@ try:
         print(data)
         totalamt += item[1]
         avgamt += item[2]
-    data += '總金額:'+str(totalamt)+'萬 '+'月平均:'+str(avgamt)+'萬 '
+    data += '總金額:'+str(totalamt)+'萬 '+'月平均:'+str(round(avgamt,ndigits=1))+'萬 '
     print(data)
     con.close()
 except sqlite3.Error as e:
