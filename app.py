@@ -107,7 +107,7 @@ def handle_message(event):
                     )
                 ]
             )
-        )
+        
         # line_bot_api.reply_message(event.reply_token, carousel_template_message)
         template_message = TemplateSendMessage(
         alt_text = 'Carousel alt text', template = carousel_template)
