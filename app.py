@@ -58,9 +58,7 @@ def callback():
 def handle_message(event):
     message = text=event.message.text
     if re.match('fwt',message):
-        carousel_template_message = TemplateSendMessage(
-            alt_text='祥威電子Line機器人',
-            template=CarouselTemplate(
+        carousel_template  = CarouselTemplate(
                 columns=[
                     CarouselColumn(
                         thumbnail_image_url='https://i.imgur.com/wpM584d.jpg',
@@ -112,7 +110,8 @@ def handle_message(event):
         )
         # line_bot_api.reply_message(event.reply_token, carousel_template_message)
         template_message = TemplateSendMessage(
-            alt_text='Carousel alt text', template=carousel_template_messag)
+        alt_text = 'Carousel alt text', template = carousel_template)
+
         line_bot_api.reply_message(event.reply_token, template_message)
     else:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
