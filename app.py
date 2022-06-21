@@ -31,8 +31,8 @@ app = Flask(__name__)
 line_bot_api = LineBotApi('7BzW5LqyzXzq+Vp9mP3EWjHGTgmto7ogCBc1QftEcMGkwauHpQ5crcBQbER/BbzeLa4BdmIsd4a/jeqEkxU/K4dTSprIDTMzadRo8JOIa+jdoyeWFxpZRlifWR4SsKhEyCx2JLRGdHHTSULjBFPN8gdB04t89/1O/w1cDnyilFU=')
 # 必須放上自己的Channel Secret
 handler = WebhookHandler('e07acd6e4cf0a0c84272962d4aa9ce0f')
-
-line_bot_api.push_message('U9903430172b3160867439bbc74135845', TextSendMessage(text='Hello Lucifer'))
+# 主動推播提示資訊: push message
+line_bot_api.push_message('U9903430172b3160867439bbc74135845', TextSendMessage(text='歡迎使用FWT小幫手. 請輸入數字9開始!'))
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
@@ -57,9 +57,9 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = text=event.message.text
-    if re.match('告訴我秘密',message):
+    if re.match('9',message):
         carousel_template_message = TemplateSendMessage(
-            alt_text='免費教學影片',
+            alt_text='祥威電子Line機器人',
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(
@@ -69,48 +69,49 @@ def handle_message(event):
                         actions=[
                             MessageAction(
                                 label='接單金額',
-                                text=data
+                                text='Sales接單明細'
                             ),
                             URIAction(
-                                label='馬上查看',
-                                uri='https://marketingliveincode.com/?page_id=270'
+                                label='公司官網',
+                                uri='http://www.forward-tech.com.tw/'
                             )
                         ]
                     ),
                     CarouselColumn(
                         thumbnail_image_url='https://i.imgur.com/W7nI6fg.jpg',
-                        title='Line Bot聊天機器人',
-                        text='台灣最廣泛使用的通訊軟體',
+                        title='FWT績效',
+                        text='待開發',
                         actions=[
                             MessageAction(
-                                label='教學內容',
-                                text='Line Bot申請與串接'
+                                label='未開發',
+                                text=data
                             ),
                             URIAction(
                                 label='馬上查看',
-                                uri='https://marketingliveincode.com/?page_id=2532'
+                                uri='http://www.forward-tech.com.tw/'
                             )
                         ]
                     ),
                     CarouselColumn(
                         thumbnail_image_url='https://i.imgur.com/l7rzfIK.jpg',
-                        title='Telegram Bot聊天機器人',
-                        text='唯有真正的方便，能帶來意想不到的價值',
+                        title='FWT績效',
+                        text='待開發2',
                         actions=[
                             MessageAction(
-                                label='教學內容',
-                                text='Telegrame申請與串接'
+                                label='未開發2',
+                                text=data
                             ),
                             URIAction(
                                 label='馬上查看',
-                                uri='https://marketingliveincode.com/?page_id=2648'
+                                uri='http://www.forward-tech.com.tw/'
                             )
                         ]
                     )
                 ]
             )
         )
-        line_bot_api.reply_message(event.reply_token, carousel_template_message)
+        # line_bot_api.reply_message(event.reply_token, carousel_template_message)
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(data))
     else:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
 #主程式
