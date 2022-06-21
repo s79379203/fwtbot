@@ -24,7 +24,7 @@ import re
 # df = pd.read_csv("c:\\users\\elvis\\Desktop\\PyCode\\mails.csv")
 # js = df.to_json(orient = 'records',  force_ascii=False)
 # data = df.to_string()
-data = 'total input is ' + str(10) +'USD'
+# data = 'total input is ' + str(10) +'USD'
 app = Flask(__name__)
 
 # 必須放上自己的Channel Access Token
@@ -64,11 +64,11 @@ def handle_message(event):
                 columns=[
                     CarouselColumn(
                         thumbnail_image_url='https://i.imgur.com/wpM584d.jpg',
-                        title='Python基礎教學',
-                        text='萬丈高樓平地起',
+                        title='FWT績效',
+                        text='接單狀況',
                         actions=[
                             MessageAction(
-                                label='教學內容',
+                                label='接單金額',
                                 text=data
                             ),
                             URIAction(
@@ -114,7 +114,29 @@ def handle_message(event):
     else:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(message))
 #主程式
-import os
+
+import sqlite3
+
+import os.path
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(BASE_DIR, "CustOrders.db")
+
+try:
+    con = sqlite3.connect(db_path)
+    cursor = con.cursor()
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+    print(cursor.fetchall()[2])
+    data = '2022年' + '\n'
+    for item in cursor.execute("SELECT * FROM OrdersBySales;"):
+        data += item[0]+'˙累積接單:'+str(item[1])+'萬'+' 月平均接單:'+str(item[2])+'萬' +'\n'
+        print(data)
+    con.close()
+except sqlite3.Error as e:
+
+    print(f"Error {e.args[0]}")
+
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
