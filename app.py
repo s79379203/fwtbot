@@ -81,9 +81,10 @@ def handle_message(event):
                         title='FWT績效',
                         text='OutPut',
                         actions=[
-                            MessageAction(
+                            PostbackAction(
                                 label='出貨金額',
-                                text=data2
+                                display_text=data2,
+                                data='action=出貨金額'
                             ),
                             URIAction(
                                 label='馬上查看',
@@ -146,7 +147,7 @@ try:
     totalamt2 = 0
     avgamt2 = 0
     for item in cursor.execute("SELECT * FROM outputbysales"):
-        data2 += item[0] + '˙出貨金額:' + str(item[1]) + '萬' + ' 月平均:' + str(item[2]) + '萬 ' + '毛利率:'+str(item[5])+'\n'
+        data2 += item[0] + '˙出貨金額:' + str(item[1]) + '萬' + ' 月平均:' + str(item[2]) + '萬 \n' + '毛利率:'+str(item[5])+'\n'
         print(data2)
         totalamt2 += item[1]
         avgamt2 += item[2]
