@@ -65,8 +65,9 @@ def handle_message(event):
                         title='FWT績效',
                         text='接單狀況',
                         actions=[
-                            MessageAction(
+                            PostbackAction(
                                 label='接單金額',
+                                data=data,
                                 text='Sales接單明細'
                             ),
                             URIAction(
@@ -107,7 +108,7 @@ def handle_message(event):
                     )
                 ]
             )
-        
+
         # line_bot_api.reply_message(event.reply_token, carousel_template_message)
         template_message = TemplateSendMessage(
         alt_text = 'Carousel alt text', template = carousel_template)
