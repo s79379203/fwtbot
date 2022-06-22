@@ -114,6 +114,9 @@ import sqlite3
 
 import os.path
 
+from datetime import date
+today = date.today()
+currentdate = today.strftime("%Y/%m/%d") # 取得今天日期
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 db_path = os.path.join(BASE_DIR, "CustOrders.db")
@@ -144,7 +147,7 @@ try:
         avgamt2 += item[2]
     data2 += '總金額:' + str(totalamt2) + '萬 \n' + '月平均:' + str(round(avgamt2, ndigits=1)) + '萬 '
     # 查詢input table
-    data3 = '2022年input/USD' + '\n'
+    data3 = currentdate+'更新input/USD:' + '\n'
     totalamt3 = 0
     avgamt3 = 0
     for item in cursor.execute("SELECT * FROM inputbysales"):
