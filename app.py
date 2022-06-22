@@ -61,7 +61,7 @@ def handle_message(event):
                                 data='action=接單明細'
                             ),
                             URIAction(
-                                label='公司官網',
+                                label='Dashboard',
                                 uri='https://s79379203.github.io/dashboard/SalesReports/SalesDashboards.html'
                             )
                         ]
@@ -69,7 +69,7 @@ def handle_message(event):
                     CarouselColumn(
                         thumbnail_image_url='https://i.imgur.com/Lr88MTG.png',
                         title='FWT績效',
-                        text='OutPut',
+                        text='OutPut金額',
                         actions=[
                             PostbackAction(
                                 label='出貨金額',
@@ -77,7 +77,7 @@ def handle_message(event):
                                 data='action=出貨金額'
                             ),
                             URIAction(
-                                label='公司官網',
+                                label='Dashboard',
                                 uri='https://s79379203.github.io/dashboard/fwt_dashboards.html'
                             )
                         ]
@@ -85,7 +85,7 @@ def handle_message(event):
                     CarouselColumn(
                         thumbnail_image_url='https://i.imgur.com/oTj2UaK.png',
                         title='FWT績效',
-                        text='Input',
+                        text='Input金額',
                         actions=[
                             PostbackAction(
                                 label='採購金額',
@@ -93,7 +93,7 @@ def handle_message(event):
                                 data='action=採購金額'
                             ),
                             URIAction(
-                                label='公司官網',
+                                label='Dashboard',
                                 uri='https://s79379203.github.io/dashboard/fwt_dashboards.html#section-input-2022%E7%B4%AF%E8%A8%88'
                             )
                         ]
