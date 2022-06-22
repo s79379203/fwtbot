@@ -62,7 +62,7 @@ def handle_message(event):
                             ),
                             URIAction(
                                 label='公司官網',
-                                uri='http://www.forward-tech.com.tw/'
+                                uri='https://s79379203.github.io/dashboard/SalesReports/SalesDashboards.html'
                             )
                         ]
                     ),
