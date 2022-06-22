@@ -78,7 +78,7 @@ def handle_message(event):
                             ),
                             URIAction(
                                 label='公司官網',
-                                uri='http://www.forward-tech.com.tw/'
+                                uri='https://s79379203.github.io/dashboard/fwt_dashboards.html'
                             )
                         ]
                     ),
@@ -94,7 +94,7 @@ def handle_message(event):
                             ),
                             URIAction(
                                 label='公司官網',
-                                uri='http://www.forward-tech.com.tw/'
+                                uri='https://s79379203.github.io/dashboard/fwt_dashboards.html#section-input-2022%E7%B4%AF%E8%A8%88'
                             )
                         ]
                     )
@@ -116,7 +116,9 @@ import os.path
 
 from datetime import date
 today = date.today()
-currentdate = today.strftime("%Y/%m/%d") # 取得今天日期
+# currentdate = today.strftime("%Y/%m/%d") # 取得今天日期
+currentyear = str(today.year)
+currentmonth = str(today.month)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 db_path = os.path.join(BASE_DIR, "CustOrders.db")
@@ -147,7 +149,7 @@ try:
         avgamt2 += item[2]
     data2 += '總金額:' + str(totalamt2) + '萬 \n' + '月平均:' + str(round(avgamt2, ndigits=1)) + '萬 '
     # 查詢input table
-    data3 = currentdate+'更新input/USD:' + '\n'
+    data3 = currentyear+'年'+currentmonth+'月更新input/USD:' + '\n'
     totalamt3 = 0
     avgamt3 = 0
     for item in cursor.execute("SELECT * FROM inputbysales"):
