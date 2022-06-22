@@ -1,13 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jun  2 21:16:35 2021
-
-@author: Ivan
-版權屬於「行銷搬進大程式」所有，若有疑問，可聯絡ivanyang0606@gmail.com
-
-Line Bot聊天機器人
-第四章 選單功能
-多樣版組合按鈕CarouselTemplate
+FWT LineBot小幫手
+2022.06.21
 """
 #載入LineBot所需要的套件
 from flask import Flask, request, abort
@@ -20,11 +14,7 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 import re
-# import pandas as pd
-# df = pd.read_csv("c:\\users\\elvis\\Desktop\\PyCode\\mails.csv")
-# js = df.to_json(orient = 'records',  force_ascii=False)
-# data = df.to_string()
-# data = 'total input is ' + str(10) +'USD'
+
 app = Flask(__name__)
 
 # 必須放上自己的Channel Access Token
@@ -61,7 +51,7 @@ def handle_message(event):
         carousel_template  = CarouselTemplate(
                 columns=[
                     CarouselColumn(
-                        thumbnail_image_url='https://i.imgur.com/xZmu9jp.jpg',
+                        thumbnail_image_url='https://i.imgur.com/oINarLO.png',
                         title='FWT績效',
                         text='接單狀況',
                         actions=[
@@ -87,22 +77,23 @@ def handle_message(event):
                                 data='action=出貨金額'
                             ),
                             URIAction(
-                                label='馬上查看',
+                                label='公司官網',
                                 uri='http://www.forward-tech.com.tw/'
                             )
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='https://i.imgur.com/l7rzfIK.jpg',
+                        thumbnail_image_url='https://i.imgur.com/oTj2UaK.png',
                         title='FWT績效',
-                        text='待開發2',
+                        text='Input',
                         actions=[
-                            MessageAction(
-                                label='未開發2',
-                                text=data
+                            PostbackAction(
+                                label='採購金額',
+                                display_text=data3,
+                                data='action=採購金額'
                             ),
                             URIAction(
-                                label='馬上查看',
+                                label='公司官網',
                                 uri='http://www.forward-tech.com.tw/'
                             )
                         ]
@@ -152,6 +143,16 @@ try:
         totalamt2 += item[1]
         avgamt2 += item[2]
     data2 += '總金額:' + str(totalamt2) + '萬 \n' + '月平均:' + str(round(avgamt2, ndigits=1)) + '萬 '
+    # 查詢input table
+    data3 = '2022年input/USD' + '\n'
+    totalamt3 = 0
+    avgamt3 = 0
+    for item in cursor.execute("SELECT * FROM inputbysales"):
+        data3 += item[0] + '˙採購金額:' + str(item[1]) + '萬 \n' + '月平均:' + str(item[2]) + '萬 \n'
+        print(data3)
+        totalamt3 += item[1]
+        avgamt3 += item[2]
+    data3 += '採購總金額USD:' + str(totalamt3) + '萬 \n' + '月平均USD:' + str(round(avgamt3, ndigits=1)) + '萬 '
     con.close()
 except sqlite3.Error as e:
 
