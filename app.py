@@ -85,10 +85,10 @@ def handle_message(event):
                     CarouselColumn(
                         thumbnail_image_url='https://i.imgur.com/oTj2UaK.png',
                         title='FWT績效',
-                        text='Input金額',
+                        text='HRS Input金額',
                         actions=[
                             PostbackAction(
-                                label='採購金額',
+                                label='HRS採購金額',
                                 display_text=data3,
                                 data='action=採購金額'
                             ),
@@ -149,7 +149,7 @@ try:
         avgamt2 += item[2]
     data2 += '總金額:' + str(totalamt2) + '萬 \n' + '月平均:' + str(round(avgamt2, ndigits=1)) + '萬 '
     # 查詢input table
-    data3 = currentyear+'年'+currentmonth+'月更新input/USD:' + '\n'
+    data3 = currentyear+'年'+currentmonth+'月更新HRS input/USD:' + '\n'
     totalamt3 = 0
     avgamt3 = 0
     for item in cursor.execute("SELECT * FROM inputbysales"):
