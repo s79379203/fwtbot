@@ -1,10 +1,6 @@
-cd D:/fwtbot
+heroku git:remote -a "bot20220715"
 
-git init
-
-heroku git:remote -a bot20220715
-
-git add .
+git add CustOrders.db
 
 git commit -am "update custorders"
 
