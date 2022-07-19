@@ -25,7 +25,7 @@ line_bot_api = LineBotApi('tFQSmjyJiF0D1FBBWedSPZow+6pAQgDbaW7oTyX2VpA9TxR6dUKiJ
 handler = WebhookHandler('4e658180396dad03bd7323fcf7815232')
 # 主動推播提示資訊: push message (Your user ID, TextSendMessage())
 # 20220714 line_bot_api.push_message('U9903430172b3160867439bbc74135845', TextSendMessage(text='FWT小幫手資料已更新. 請輸入小寫fwt開始!'))
-line_bot_api.push_message('U53be936e1a490c452cb4e85ac52ae60b', TextSendMessage(text='FWT小幫手資料已更新. 請輸入小寫fwt開始!'))
+line_bot_api.push_message('U53be936e1a490c452cb4e85ac52ae60b', TextSendMessage(text='FWT小幫手已啟動. 請輸入小寫fwt開始!'))
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
